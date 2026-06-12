@@ -9,6 +9,10 @@ df = pd.read_csv("imdb.csv")
 X = df['review']
 y = df['sentiment']
 
+# Data validation: Check if 'sentiment' column is binary
+if y.nunique() != 2:
+    raise ValueError("The 'sentiment' column is not binary, which is a requirement for Logistic Regression.")
+
 vectorizer = CountVectorizer(stop_words='english')
 X_vec = vectorizer.fit_transform(X)
 
